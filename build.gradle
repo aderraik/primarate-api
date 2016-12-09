@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+configurations {
+  runtimeOnly
+}
+
+dependencies {
+	compile 'javax.servlet:servlet-api:2.4'
+	compile 'org.visian:visian-bid-management:0.0.1-csoares-SNAPSHOT'
+    
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+        
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath (group: 'com.sahlbach.gradle', name: 'gradle-jetty-eclipse-plugin', version: '1.9.+')
+    }
+}
+
+apply plugin: 'jettyEclipse'
+
+  
+task stage(dependsOn: ["clean", "war"])
