@@ -7,9 +7,9 @@
 
 #### Building and running local server
 
-`> gradle appRun`
+`> gradle build appRun`
 
 #### Usage
 
-[http://localhost:8080/](http://localhost:8080/)
+[http://localhost:8081/justarate](http://localhost:8081/justarate)
 

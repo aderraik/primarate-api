@@ -14,23 +14,23 @@ configurations {
 }
 
 dependencies {
-	compile 'javax.servlet:servlet-api:2.4'
-	compile 'org.visian:visian-bid-management:0.0.1-csoares-SNAPSHOT'
-	compile 'org.glassfish.jersey.containers:jersey-container-servlet-core:2.25'
-	compile 'org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.25'
+	compile 'javax.servlet:javax.servlet-api:3.1.0'
+
+	compile 'org.glassfish.jersey.containers:jersey-container-grizzly2-servlet:2.25'
 	compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.25'
-	compile 'io.jsonwebtoken:jjwt:0.6.0'
+	compile 'io.jsonwebtoken:jjwt:0.7.0'
+	
+	compile 'org.visian:visian-bid-management:0.0.1-csoares-SNAPSHOT'
     
     testCompile group: 'junit', name: 'junit', version: '4.+'
-    testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-bundle:2.22.2'
+    testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-bundle:2.25'
         
 }
 
 buildscript {
   repositories {
+    mavenLocal()
     jcenter()
-    // enable this to use snapshot versions of Gretty:
-    // maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local' }
   }
 
   dependencies {
@@ -39,5 +39,12 @@ buildscript {
 }
 
 apply plugin: 'org.akhikhl.gretty'
+
+gretty {
+  // supported values:
+  // 'jetty7', 'jetty8', 'jetty9', 'tomcat7', 'tomcat8'
+  servletContainer = 'jetty9'
+  httpPort = 8081
+}
 
 task stage(dependsOn: ["clean", "war"])
