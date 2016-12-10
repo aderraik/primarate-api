@@ -7,7 +7,7 @@
 
 #### Building and running local server
 
-`> gradle build jettyEclipseRun`
+`> gradle appRun`
 
 #### Usage
 

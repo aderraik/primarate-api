@@ -3,6 +3,24 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>Just a rate</display-name>
 
+	<filter>
+        <filter-name>JerseyFilter</filter-name>
+        <filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>com.visiansystems.JerseyConfig</param-value>
+        </init-param>
+        <!-- pass to next filter if Jersey/App returns 404 -->
+        <init-param>
+            <param-name>jersey.config.servlet.filter.forwardOn404</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>JerseyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
