@@ -11,5 +11,8 @@
 
 #### Usage
 
-[http://localhost:8081/justarate](http://localhost:8081/justarate)
+http://localhost:8081/justarate/convert/{currencyIn}/{amount}/{currencyOut}
+
+Example:
+[http://localhost:8081/justarate/convert/BRL/10/USD](http://localhost:8081/justarate/convert/BRL/10/USD)
 
