@@ -7,11 +7,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.visiansystems.bl.bankRateFeed.BankRateFeed;
 import com.visiansystems.exception.BankRateFeedException;
+import com.visiansystems.rates.BankRates;
 
 @Component
 @Path("/convert")
@@ -20,14 +19,12 @@ public class RateConverter {
 	
 
 	@Autowired
-    @Qualifier("bcbRateFeed")	
-    private BankRateFeed bcbBankRateFeed;
+    private BankRates bank;
 
 	@GET
 	@Path("/{currencyIn}/{amount}/{currencyOut}")
 	public Double convert(@PathParam("currencyIn") String currencyIn, @PathParam("amount") Double amount, @PathParam("currencyOut") String currencyOut) throws IllegalArgumentException, BankRateFeedException {
-		//return bcbBankRateFeed.convert(amount, currencyIn, currencyOut);
-		return amount;
+		return bank.convert(amount, currencyIn, currencyOut);
 	}
 	
 }

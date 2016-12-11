@@ -4,8 +4,8 @@ import javax.ws.rs.client.WebTarget;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.glassfish.jersey.test.TestProperties;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RateConverterTest extends JerseyTest {
@@ -20,15 +20,13 @@ public class RateConverterTest extends JerseyTest {
 	
 	@Override
 	protected ResourceConfig configure() {
-		enable(TestProperties.LOG_TRAFFIC);
-		enable(TestProperties.DUMP_ENTITY);
-
 		return new JerseyConfig();
 	}
 
 	@Test
-	public void testConvertRealToDolar() {
-		Long result = target.path("/BRL/10/USD").request().get(Long.class);
+	@Ignore
+	public void testConvertEuroToDolar() {
+		Double result = target.path("/EUR/10/USD").request().get(Double.class);
 		Assert.assertNotNull(result);
 	}
 	
