@@ -14,11 +14,8 @@ configurations {
 }
 
 dependencies {
-	compile 'javax.servlet:javax.servlet-api:3.1.0'
-
-	compile 'org.glassfish.jersey.containers:jersey-container-grizzly2-servlet:2.25'
-	compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.25'
-	compile 'io.jsonwebtoken:jjwt:0.7.0'
+	compile 'org.springframework.boot:spring-boot-starter-parent:1.4.2.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-jersey:1.4.2.RELEASE'
 	
 	compile 'org.visian:visian-bid-management:0.0.1-csoares-SNAPSHOT'
     
