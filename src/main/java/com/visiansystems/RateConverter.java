@@ -22,9 +22,9 @@ public class RateConverter {
     private BankRates bank;
 
 	@GET
-	@Path("/{currencyIn}/{amount}/{currencyOut}")
-	public Double convert(@PathParam("currencyIn") String currencyIn, @PathParam("amount") Double amount, @PathParam("currencyOut") String currencyOut) throws IllegalArgumentException, BankRateFeedException {
-		return bank.convert(amount, currencyIn, currencyOut);
+	@Path("/{centralBankId}/{currencyIn}/{amount}/{currencyOut}")
+	public Double convert(@PathParam("centralBankId") Long centralBankId, @PathParam("currencyIn") String currencyIn, @PathParam("amount") Double amount, @PathParam("currencyOut") String currencyOut) throws IllegalArgumentException, BankRateFeedException {
+		return bank.convert(centralBankId, amount, currencyIn, currencyOut);
 	}
 	
 }
