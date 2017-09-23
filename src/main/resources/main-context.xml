@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans     http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop       http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+            http://www.springframework.org/schema/util      http://www.springframework.org/schema/util/spring-util-3.0.xsd
+            http://www.springframework.org/schema/context   http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!-- Loading content classes first -->
+    <bean class="com.visiansystems.util.MonetaryUtils"/>
+
+
+    <!-- Turning AOP on -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- Scans the classpath of this application for @Components to deploy as beans -->
+    <context:component-scan base-package="com.visiansystems"/>
+
+    <!-- Properties file configuration -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:bl/bankRateFeed/bcb/bcb.properties</value>
+                <value>classpath:bl/bankRateFeed/ecb/ecb.properties</value>
+                <value>classpath:dao/generator/centralBankTableGenerator.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <!--<context:property-placeholder location="classpath*:*persistence-${envTarget}.properties" />-->
+
+    <!-- Common beans to all modules -->
+    <bean id="dateFormat" class="java.text.SimpleDateFormat">
+        <constructor-arg value="dd-MM-yyyy"/>
+    </bean>
+    <bean id="logger" class="org.apache.log4j.Logger" factory-method="getLogger">
+        <constructor-arg type="java.lang.String" value="visian"/>
+    </bean>
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+    <bean id="contentNegotiationManager"
+          class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="true"/>
+        <property name="useJaf" value="false"/>
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="favorParameter" value="true"/>
+        <!--<property name="parameterName" value="mediaType"/>-->
+        <property name="defaultContentType" value="application/json"/>
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json"/>
+                <entry key="html" value="application/html"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Dependencies -->
+    <import resource="classpath:bl/bankRateFeed/bankRateFeed-context.xml"/>
+    <import resource="classpath:persistence-context.xml"/>
+
+
+    <!-- DB Generator -->
+    <import resource="classpath:dao/generator/centralBankTableGenerator-context.xml"/>
+
+    <bean id="centralBankTableGenerator"
+          class="com.visiansystems.dao.generator.CentralBankTableGenerator"/>
+    <bean id="monetaryTablesGenerator" class="com.visiansystems.dao.generator.MonetaryTablesGenerator"/>
+    <bean id="bankFeedReferenceTableGenerator"
+          class="com.visiansystems.dao.generator.BankFeedReferenceTableGenerator"/>
+
+    <bean id="dataBaseGeneratorToggles" class="com.visiansystems.dao.generator.DataBaseGeneratorToggles">
+        <property name="centralBankTable" value="true"/>
+        <property name="monetaryTables" value="true"/>
+        <property name="bankFeedReferenceTable" value="true"/>
+    </bean>
+
+    <util:list id="centralBankDateList" value-type="com.visiansystems.model.CentralBank">
+        <ref bean="bcbCentralBank"/>
+        <ref bean="ecbCentralBank"/>
+    </util:list>
+
+    <util:map id="centralBankMap">
+        <entry key-ref="bcbCentralBank" value-ref="bcbCurrencies"/>
+        <entry key-ref="ecbCentralBank" value-ref="ecbCurrencies"/>
+    </util:map>
+
+    <util:map id="updateDateMap">
+        <entry key-ref="bcbCentralBank" value-ref="bcbReferenceDate"/>
+        <entry key-ref="ecbCentralBank" value-ref="ecbReferenceDate"/>
+    </util:map>
+</beans>

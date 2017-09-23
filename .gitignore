@@ -1,8 +1,28 @@
-/.gradle/
-/bin/
-/build/
-/.classpath
-/.project
-/gradle/
-/.settings/
-/log/
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Java / Maven
+log/
+target/
+*.jar
+atlassian-ide-plugin.xml
+*.class
+
+# Node
+node_modules
+.grunt
+dist/
+
+# Cucumber
+.bundle
+
