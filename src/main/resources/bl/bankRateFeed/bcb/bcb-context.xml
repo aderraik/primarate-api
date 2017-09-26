@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/util      http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <!-- Common BCB Beans -->
+    <bean id="bcbDto" class="com.visiansystems.bl.bankRateFeed.bcb.BcbDto">
+        <property name="centralBankId" value="${bank.bcb.id}"/>
+    </bean>
+    <bean id="bcbRateFeed" class="com.visiansystems.bl.bankRateFeed.bcb.BcbRateFeed"/>
+    <bean id="bcbReferenceDate" factory-bean="dateFormat" factory-method="parse">
+        <constructor-arg value="${bank.bcb.referenceDate}"/>
+    </bean>
+
+    <!-- List of BCB currencies containing default values loaded from the property file -->
+    <util:list id="bcbCurrencies" value-type="com.visiansystems.model.MonetaryUnit">
+        <!-- US Dollar (USD) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.usd.id}"/>
+            <property name="code" value="${bcb.munit.usd.code}"/>
+            <property name="symbol" value="${bcb.munit.usd.code}"/>
+            <property name="name" value="${bcb.munit.usd.name}"/>
+        </bean>
+        <!-- Euro (EUR) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.eur.id}"/>
+            <property name="code" value="${bcb.munit.eur.code}"/>
+            <property name="symbol" value="${bcb.munit.eur.code}"/>
+            <property name="name" value="${bcb.munit.eur.name}"/>
+        </bean>
+        <!-- Japanese Yen (JPY) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.jpy.id}"/>
+            <property name="code" value="${bcb.munit.jpy.code}"/>
+            <property name="symbol" value="${bcb.munit.jpy.code}"/>
+            <property name="name" value="${bcb.munit.jpy.name}"/>
+        </bean>
+        <!-- British Pound (GBP) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.gbp.id}"/>
+            <property name="code" value="${bcb.munit.gbp.code}"/>
+            <property name="symbol" value="${bcb.munit.gbp.code}"/>
+            <property name="name" value="${bcb.munit.gbp.name}"/>
+        </bean>
+        <!-- Swiss Franc (CHF) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.chf.id}"/>
+            <property name="code" value="${bcb.munit.chf.code}"/>
+            <property name="symbol" value="${bcb.munit.chf.code}"/>
+            <property name="name" value="${bcb.munit.chf.name}"/>
+        </bean>
+        <!-- Danish Krone (DKK) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.dkk.id}"/>
+            <property name="code" value="${bcb.munit.dkk.code}"/>
+            <property name="symbol" value="${bcb.munit.dkk.code}"/>
+            <property name="name" value="${bcb.munit.dkk.name}"/>
+        </bean>
+        <!-- Norwegian Krone (NOK) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.nok.id}"/>
+            <property name="code" value="${bcb.munit.nok.code}"/>
+            <property name="symbol" value="${bcb.munit.nok.code}"/>
+            <property name="name" value="${bcb.munit.nok.name}"/>
+        </bean>
+        <!-- Swedish Krona (SEK) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.sek.id}"/>
+            <property name="code" value="${bcb.munit.sek.code}"/>
+            <property name="symbol" value="${bcb.munit.sek.code}"/>
+            <property name="name" value="${bcb.munit.sek.name}"/>
+        </bean>
+        <!-- Australian Dollar (AUD) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.aud.id}"/>
+            <property name="code" value="${bcb.munit.aud.code}"/>
+            <property name="symbol" value="${bcb.munit.aud.code}"/>
+            <property name="name" value="${bcb.munit.aud.name}"/>
+        </bean>
+        <!-- Canadian Dollar (CAD) -->
+        <bean class="com.visiansystems.model.MonetaryUnit">
+            <property name="id" value="${bcb.munit.cad.id}"/>
+            <property name="code" value="${bcb.munit.cad.code}"/>
+            <property name="symbol" value="${bcb.munit.cad.code}"/>
+            <property name="name" value="${bcb.munit.cad.name}"/>
+        </bean>
+    </util:list>
+
+</beans>
