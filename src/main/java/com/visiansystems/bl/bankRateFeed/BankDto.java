@@ -13,62 +13,60 @@ import java.time.LocalDate;
  */
 public interface BankDto {
 
-    public void init();
+    void init();
 
     /**
      * Download and save locally all the latest data from the Remote Bank Service.
      */
-    public void downloadRate() throws BankDtoException;
+    void downloadRate() throws BankDtoException;
 
-    public void downloadRate(String currencyCode) throws BankDtoException;
+    void downloadRate(String currencyCode) throws BankDtoException;
 
-    public void downloadRate(String[] currenciesCode) throws BankDtoException;
+    void downloadRate(String[] currenciesCode) throws BankDtoException;
 
     /**
      * Clear all rates saved within the object.
      */
-    public void clear();
+    void clear();
 
     /**
      * Returns the last available rate aggregated in the DTO. To get the latest value from the Bank,
      * it is required to call downloadRate() first. It will return null if downloadRate wasn't called at least
      * once.
      */
-    public MonetaryData getLastRate(String currencyCode)
-            throws BankDtoException;
+    MonetaryData getLastRate(String currencyCode) throws BankDtoException;
 
     /**
      * Returns, if available, the rate given a currency code and a date.
      */
-    public MonetaryData getRateOnDate(String currencyCode, LocalDate date)
-            throws BankDtoException;
+    MonetaryData getRateOnDate(String currencyCode, LocalDate date) throws BankDtoException;
 
     /**
      * Returns values of one or more series on a date range. The output result is on the
      * MonetarySeriesData object format. The returned list might be in a different order than the
      * one passed on the input.
      */
-    public MonetarySeriesData getRatesOnDateRange(
+    MonetarySeriesData getRatesOnDateRange(
             String currencyCodes[], LocalDate startDate, LocalDate endDate) throws BankDtoException;
 
-    public int getCentralBankId();
+    int getCentralBankId();
 
     /**
      * Getter and Setter of the central bank id.
      */
-    public void setCentralBankId(int centralBankId);
+    void setCentralBankId(int centralBankId);
 
-    public MonetarySeriesData getDownloadedSeriesData();
+    MonetarySeriesData getDownloadedSeriesData();
 
     /**
      * Getter and setter of the downloaded series data.
      */
-    public void setDownloadedSeriesData(MonetarySeriesData seriesData);
+    void setDownloadedSeriesData(MonetarySeriesData seriesData);
 
     /**
      *
      */
-    public LocalDate getDtoReferenceDate(String currencyCode);
+    LocalDate getDtoReferenceDate(String currencyCode);
 
     void loadDtoReferenceDate();
 }
