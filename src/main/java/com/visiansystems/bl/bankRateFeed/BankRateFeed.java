@@ -15,32 +15,32 @@ import java.util.List;
  */
 public interface BankRateFeed {
 
-    public void init();
+    void init();
 
     /**
      * Gets the bank data transfer object.
      */
-    public BankDto getBankDto();
+    BankDto getBankDto();
 
     /**
      * Gets the central bank of this rate feed.
      */
-    public CentralBank getCentralBank();
+    CentralBank getCentralBank();
 
     /**
      * Returns currencies for which exchange rates are available.
      */
-    public List<MonetaryUnit> getAvailableCurrencies();
+    List<MonetaryUnit> getAvailableCurrencies();
 
     /**
      * Check whether the exchange rate for a given currency is available.
      */
-    public boolean isAvailable(String currencyCode);
+    boolean isAvailable(String currencyCode);
 
     /**
      * Gets the last date which the rates were updated.
      */
-    public LocalDate getReferenceDate(String code);
+    LocalDate getReferenceDate(String code);
 
     /**
      * Convert methods. Converts a double precision floating point value from one currency
@@ -48,22 +48,19 @@ public interface BankRateFeed {
      * <p/>
      * Example: convert(29.95, "USD", "EUR") - converts $29.95 US Dollars to Euro.
      */
-    public double convert(double amount, String fromCurrencyCode, String toCurrencyCode)
-            throws BankRateFeedException, IllegalArgumentException;
+    double convert(double amount, String fromCurrencyCode, String toCurrencyCode) throws BankRateFeedException, IllegalArgumentException;
 
-    public double convert(double amount, String fromCurrencyCode, String toCurrencyCode,
-                          LocalDate date)
-            throws BankRateFeedException, IllegalArgumentException;
+    double convert(double amount, String fromCurrencyCode, String toCurrencyCode, LocalDate date) throws BankRateFeedException, IllegalArgumentException;
 
     /**
      *
      */
-    public void update() throws BankDtoException;
+    void update() throws BankDtoException;
 
-    public void update(String[] currenciesCode) throws BankDtoException;
+    void update(String[] currenciesCode) throws BankDtoException;
 
     /**
      *
      */
-    public void persist() throws BankRateFeedException;
+    void persist() throws BankRateFeedException;
 }
