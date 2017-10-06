@@ -1,7 +1,8 @@
 package com.visiansystems.service;
 
 import com.visiansystems.AbstractTest;
-import com.visiansystems.model.SimpleObject;
+import com.visiansystems.simpleobject.SimpleObject;
+import com.visiansystems.simpleobject.SimpleService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

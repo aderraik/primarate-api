@@ -1,5 +1,6 @@
 package com.visiansystems.controller;
 
+import com.visiansystems.docs.DocsController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
