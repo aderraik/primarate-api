@@ -1,0 +1,9 @@
+package com.visiansystems.ecb;
+
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+
+public interface CentralBankRepository extends CrudRepository<CentralBank, Long> {
+    List<CentralBank> findByName(String name);
+}

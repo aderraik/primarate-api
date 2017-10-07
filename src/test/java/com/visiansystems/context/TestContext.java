@@ -2,7 +2,6 @@ package com.visiansystems.context;
 
 import com.visiansystems.WebAppContext;
 import com.visiansystems.docs.SwaggerContext;
-import com.visiansystems.simpleobject.SimpleServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -22,9 +21,9 @@ public class TestContext {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
-    @Bean
-    public SimpleServiceImpl simpleService() {
-        return new SimpleServiceImpl();
-    }
+//    @Bean
+//    public SimpleServiceImpl simpleService() {
+//        return new SimpleServiceImpl();
+//    }
 }
 

@@ -10,26 +10,16 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * The ApiDocsConfiguration class provides configuration beans for the Swagger API documentation
- * generator.
- */
 @EnableSwagger2
 @Configuration
 public class SwaggerContext {
 
-    /**
-     * Create a Docket class to be used by Springfox's Swagger API Documentation framework.
-     * See http://springfox.github.io/springfox/ for more information.
-     *
-     * @return A Docket instance.
-     */
     @Bean
     public Docket docket() {
-        Predicate<String> paths = PathSelectors.ant("/tutorial/**");
+        Predicate<String> paths = PathSelectors.ant("/justarate/**");
 
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("Visian Spring Tutorial")
+                .title("Justarate API")
                 .contact("visiansystems.com").version("0.0.1").build();
 
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
