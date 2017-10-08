@@ -20,4 +20,9 @@ public class MonetaryUnitServiceImpl implements MonetaryUnitService {
     public MonetaryUnit findOne(Long id) {
         return repository.findOne(id);
     }
+
+    @Override
+    public MonetaryUnit findByCode(String code) {
+        return repository.findByCode(code);
+    }
 }

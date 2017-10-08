@@ -1,16 +1,18 @@
-package com.visiansystems.ratesfetcher;
+package com.visiansystems.rates;
 
 import com.visiansystems.ecb.EcbRpcParser;
-import com.visiansystems.ecb.MonetarySeriesData;
+import com.visiansystems.util.MonetaryUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.concurrent.TimeUnit;
 
 public class RatesFetcherDaemon implements Runnable {
     private EcbRpcParser ecbRpc;
 
-    public RatesFetcherDaemon() {
+    public RatesFetcherDaemon(MonetaryUtils monetaryUtils) {
 
         try {
-            ecbRpc = new EcbRpcParser();
+            ecbRpc = new EcbRpcParser(monetaryUtils);
             ecbRpc.setCacheFileName("/tmp/ecb.xml");
             ecbRpc.refreshCacheFile();
 

@@ -1,5 +1,6 @@
 package com.visiansystems.ecb;
 
+import com.visiansystems.rates.Rate;
 import com.visiansystems.util.MonetaryUtils;
 import com.visiansystems.util.logger.CallLogging;
 import org.apache.log4j.Logger;
@@ -16,21 +17,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class EcbRpcParser extends EcbRpc {
     private SimpleDateFormat dateFormat;
-    private Date parseDate; //TODO: Remove?
+    private Date parseDate;
     private MonetarySeriesData seriesData;
     private long centralBankId;
 
-    @Autowired
-    private Logger logger;
+    private MonetaryUtils utils;
 
-    public EcbRpcParser() {
+    public EcbRpcParser(MonetaryUtils monetaryUtils) {
         super();
-        seriesData = new MonetarySeriesData(centralBankId);
+        centralBankId = 1; //TODO: Associate with DB
+        seriesData = new MonetarySeriesData(1);
         dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
+        utils = monetaryUtils;
     }
 
     public void update() {
@@ -47,7 +50,7 @@ public class EcbRpcParser extends EcbRpc {
             }
         }
         catch (Exception e) {
-            logger.warn(e);
+//            logger.warn(e);
         }
     }
 
@@ -66,7 +69,6 @@ public class EcbRpcParser extends EcbRpc {
         DefaultHandler handler = new DefaultHandler() {
 
             public void startElement(String uri, String localName, String qName, Attributes attributes) {
-                MonetaryData data = new MonetaryData();
 
                 if (localName.equals("Cube")) {
                     String date = attributes.getValue("time");
@@ -88,13 +90,15 @@ public class EcbRpcParser extends EcbRpc {
                     String currencyCode = attributes.getValue("currency");
 
                     if (amount != null && currencyCode != null) {
-                        System.out.println(amount + ", " + currencyCode);
+//                        System.out.println("EUR -> " + currencyCode + ": " + amount);
 
-                        data.setAmount(Double.parseDouble(amount));
-                        data.setMonetaryUnitId(MonetaryUtils.getMonetaryIdFromCode(currencyCode));
-                        data.setCentralBankId(centralBankId);
-//                        data.setDate(new LocalDate(parseDate));
+                        Rate rate = new Rate();
+                        rate.setCentralBankId(centralBankId);
+                        rate.setAmount(Double.parseDouble(amount));
+                        rate.setMonetaryUnitId(utils.getCurrencyId(currencyCode));
+                        rate.setDate(parseDate);
 
+                        System.out.println(rate);
 //                        seriesData.addMonetaryData(data);
                     }
                 }

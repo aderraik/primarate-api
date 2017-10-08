@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------------------------
+-- MONETARY UNITS
+--------------------------------------------------------------------------------------------------
+
 INSERT INTO MonetaryUnit(id, code, name) VALUES (1, 'AED', 'United Arab Emirates Dirham');
 INSERT INTO MonetaryUnit(id, code, name) VALUES (2, 'AFN', 'Afghanistan Afghani');
 INSERT INTO MonetaryUnit(id, code, name) VALUES (3, 'ALL', 'Albania Lek');
@@ -161,6 +165,9 @@ INSERT INTO MonetaryUnit(id, code, name) VALUES (160, 'ZAR', 'South Africa Rand'
 INSERT INTO MonetaryUnit(id, code, name) VALUES (161, 'ZMW', 'Zambia Kwacha');
 INSERT INTO MonetaryUnit(id, code, name) VALUES (162, 'ZWD', 'Zimbabwe Dollar');
 
+--------------------------------------------------------------------------------------------------
+-- MONETARY COUNTRIES
+--------------------------------------------------------------------------------------------------
 
 INSERT INTO MonetaryCountry(name, monetaryUnitId) VALUES ('Afghanistan', 2);
 INSERT INTO MonetaryCountry(name, monetaryUnitId) VALUES ('Albania', 3);
@@ -361,3 +368,10 @@ INSERT INTO MonetaryCountry(name, monetaryUnitId) VALUES ('Virgin Islands (US)',
 INSERT INTO MonetaryCountry(name, monetaryUnitId) VALUES ('Yemen', 159);
 INSERT INTO MonetaryCountry(name, monetaryUnitId) VALUES ('Zambia', 161);
 INSERT INTO MonetaryCountry(name, monetaryUnitId) VALUES ('Zimbabwe', 162);
+
+--------------------------------------------------------------------------------------------------
+-- CENTRAL BANKS
+--------------------------------------------------------------------------------------------------
+
+INSERT INTO CentralBank(id, name, currencyId) VALUES (1, 'Brazilian Central Bank', 20);
+INSERT INTO CentralBank(id, name, currencyId) VALUES (2, 'European Central Bank', 44);

@@ -1,28 +1,23 @@
-package com.visiansystems.ecb;
+package com.visiansystems.rates;
+
+import com.visiansystems.ecb.LocalDatePersistenceConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
- * Represents an entry on the MonetaryData table.
- * <p/>
- * Eg.:
- * +------+--------+---------------+------------+----------------+
- * | id   | amount | centralBankId | date       | monetaryUnitId |
- * +------+--------+---------------+------------+----------------+
- * |    8 | 2.4699 |             1 | 2015-04-30 |             12 |
- * |   18 |  2.407 |             1 | 2015-04-28 |             12 |
- * |   28 |  2.456 |             1 | 2015-04-29 |             12 |
- * +------+--------+---------------+------------+----------------+
+ * +------+---------------+----------------+--------+------------+
+ * |   id | centralBankId | monetaryUnitId | amount |       date |
+ * +------+---------------+----------------+--------+------------+
+ * |    1 |             1 |             12 |  2.469 | 2015-04-30 |
+ * |    2 |             1 |             12 |  2.407 | 2015-04-28 |
+ * |    3 |             1 |             12 |  2.456 | 2015-04-29 |
+ * +------+---------------+----------------+--------+------------+
  */
 @Entity
-@Table(name = "MonetaryData",
-        uniqueConstraints = @UniqueConstraint(columnNames = { "centralBankId",
-                                                              "monetaryUnitId",
-                                                              "date" }))
-
-public class MonetaryData implements Comparable<MonetaryData> {
-
+@Table(name = "Rate", uniqueConstraints = @UniqueConstraint(columnNames = { "centralBankId", "monetaryUnitId", "date" }))
+public class Rate implements Comparable<Rate> {
     public static final String outFormat = "%1$03d | %2$03d | %3$td/%3$tm/%3$tY | %4$7.4f";
 
     @Id
@@ -36,17 +31,17 @@ public class MonetaryData implements Comparable<MonetaryData> {
     @Column(nullable = false, name = "monetaryUnitId")
     private long monetaryUnitId;
 
-    @Column(nullable = false, name = "date")
-    @Convert(converter = LocalDatePersistenceConverter.class)
-    private LocalDate date;
-
     @Column(nullable = false, name = "amount")
     private double amount;
 
-    public MonetaryData() {
+    @Column(nullable = false, name = "date")
+//    @Convert(converter = LocalDatePersistenceConverter.class)
+    private Date date;
+
+    public Rate() {
     }
 
-    public MonetaryData(long centralBankId, long monetaryUnitId, LocalDate date, double amount) {
+    public Rate(long centralBankId, long monetaryUnitId, Date date, double amount) {
         this.centralBankId = centralBankId;
         this.monetaryUnitId = monetaryUnitId;
         this.date = date;
@@ -77,11 +72,11 @@ public class MonetaryData implements Comparable<MonetaryData> {
         this.monetaryUnitId = monetaryUnitId;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -107,7 +102,7 @@ public class MonetaryData implements Comparable<MonetaryData> {
     }
 
     @Override
-    public int compareTo(MonetaryData o) {
+    public int compareTo(Rate o) {
         return Long.compare(monetaryUnitId, o.getMonetaryUnitId());
     }
 
@@ -115,8 +110,8 @@ public class MonetaryData implements Comparable<MonetaryData> {
     public boolean equals(Object object) {
         boolean sameSame = false;
 
-        if (object != null && object instanceof MonetaryData) {
-            sameSame = this.monetaryUnitId == ((MonetaryData)object).monetaryUnitId;
+        if (object != null && object instanceof Rate) {
+            sameSame = this.monetaryUnitId == ((Rate)object).monetaryUnitId;
         }
         return sameSame;
     }

@@ -1,5 +1,6 @@
 package com.visiansystems.ecb;
 
+import com.visiansystems.bank.CentralBank;
 import com.visiansystems.monetaryunit.MonetaryUnit;
 
 import java.time.LocalDate;

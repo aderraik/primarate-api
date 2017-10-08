@@ -6,4 +6,6 @@ public interface MonetaryUnitService {
     Collection<MonetaryUnit> findAll();
 
     MonetaryUnit findOne(Long id);
+
+    MonetaryUnit findByCode(String code);
 }

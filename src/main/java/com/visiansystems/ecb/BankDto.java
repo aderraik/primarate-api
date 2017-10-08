@@ -1,5 +1,7 @@
 package com.visiansystems.ecb;
 
+import com.visiansystems.rates.Rate;
+
 import java.time.LocalDate;
 
 /**
@@ -30,12 +32,12 @@ public interface BankDto {
      * it is required to call downloadRate() first. It will return null if downloadRate wasn't called at least
      * once.
      */
-    MonetaryData getLastRate(String currencyCode) throws BankDtoException;
+    Rate getLastRate(String currencyCode) throws BankDtoException;
 
     /**
      * Returns, if available, the rate given a currency code and a date.
      */
-    MonetaryData getRateOnDate(String currencyCode, LocalDate date) throws BankDtoException;
+    Rate getRateOnDate(String currencyCode, LocalDate date) throws BankDtoException;
 
     /**
      * Returns values of one or more series on a date range. The output result is on the

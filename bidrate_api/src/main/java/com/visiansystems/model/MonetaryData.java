@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
- * Represents an entry on the MonetaryData table.
+ * Represents an entry on the Rate table.
  * <p/>
  * Eg.:
  * +------+--------+---------------+------------+----------------+
@@ -18,7 +18,7 @@ import java.time.LocalDate;
  * +------+--------+---------------+------------+----------------+
  */
 @Entity
-@Table(name = "MonetaryData",
+@Table(name = "Rate",
         uniqueConstraints = @UniqueConstraint(columnNames = { "centralBankId",
                                                               "monetaryUnitId",
                                                               "date" }))

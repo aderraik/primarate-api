@@ -27,11 +27,11 @@ public class BcbDtoDemo {
                 out.format("\nERROR: Missing arguments. Possible input parameters:\n\n");
                 out.print("  [1]: getLastRate()                                   \n");
                 out.print("       | In  | currency_code                           \n");
-                out.print("       | Out | in MonetaryData format                  \n\n");
+                out.print("       | Out | in Rate format                  \n\n");
 
                 out.print("  [2]: getRateOnDate()                                 \n");
                 out.print("       | In  | currencyCode,  date (dd/mm/YYYY)        \n");
-                out.print("       | Out | in MonetaryData format                  \n\n");
+                out.print("       | Out | in Rate format                  \n\n");
 
                 out.print("  [3]: getRatesOnDateRange                            \n");
                 out.print("       | In  | currencyCode,  initial_date,  final_date\n");

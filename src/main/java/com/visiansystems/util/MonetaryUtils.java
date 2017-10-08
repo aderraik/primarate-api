@@ -3,8 +3,10 @@ package com.visiansystems.util;
 import com.visiansystems.ecb.*;
 import com.visiansystems.monetaryunit.MonetaryUnit;
 import com.visiansystems.monetaryunit.MonetaryUnitRepository;
+import com.visiansystems.monetaryunit.MonetaryUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -23,6 +25,7 @@ import java.util.Map;
  * TODO: Transform bcbCurrencies in a map.
  * TODO: Get bank ids from properties file.
  */
+@Service
 public class MonetaryUtils {
     public static final long INVALID_MONETARY_UNIT_CODE = -1;
     public static final long INVALID_MONETARY_AMOUNT = -1;
@@ -51,24 +54,19 @@ public class MonetaryUtils {
 
     private static Map<String, Long> bcbIds;
 
-    /**
-     * Returns the database id of a monetary unit, given its currency code.
-     * TODO: Verifies which tests uses this to mock out.
-     */
-    public static long getMonetaryIdFromCode(String currencyCode) {
-        try {
-//            return unitRepository.findByCode(currencyCode).get(0).getId();
-            return 0;
-        }
-        catch (Exception e) {
-            return INVALID_MONETARY_UNIT_CODE;
-        }
+
+    @Autowired
+    private MonetaryUnitService monetaryUnitService;
+
+
+    public long getCurrencyId(String currencyCode) {
+        return monetaryUnitService.findByCode(currencyCode).getId();
     }
 
-    /**
-     * Returns the currency code given the his Id on the database.
-     * TODO: Verifies which tests uses this to mock out.
-     */
+
+
+
+    /*
     public static String getMonetaryCodeFromId(long currencyId) {
         if (unitRepository != null && unitRepository.findOne(currencyId) != null) {
             return unitRepository.findOne(currencyId).getCode();
@@ -76,20 +74,14 @@ public class MonetaryUtils {
         return INVALID_CURRENCY_CODE;
     }
 
-    /**
-     * Returns the monetary unit id of a given currency on the BCB service.
-     */
     public static long getBcbMonetaryIdFromCode(String currencyCode) {
         return bcbIds.get(currencyCode);
     }
 
-    /**
-     * Returns the monetary unit code of a given currency on the BCB service.
-     */
     public static long getBcbMonetaryCodeFromId(long bcbCurrencyId) {
         for (Map.Entry<String, Long> entry : bcbIds.entrySet()) {
             if (entry.getValue() == bcbCurrencyId) {
-                return getMonetaryIdFromCode(entry.getKey());
+                return getCurrencyId(entry.getKey());
             }
         }
         return INVALID_MONETARY_UNIT_CODE;
@@ -113,9 +105,6 @@ public class MonetaryUtils {
         return null;
     }
 
-    /**
-     * TODO: Verifies which tests uses this to mock out.
-     */
     public static LocalDate getBankRateFeedReferenceDate(long centralBankId, String currencyCode) {
         List<BankRateFeedReference> list =
                 referenceRepository.findByCurrencyCodeAndCentralBankId(currencyCode, centralBankId);
@@ -126,20 +115,13 @@ public class MonetaryUtils {
         return LocalDate.now();
     }
 
-    /**
-     * Checks if a given currency code is valid based on the ISO 4217 standard.
-     */
     public static boolean isCurrencyCodeValid(String currencyCode) {
-        if (getMonetaryIdFromCode(currencyCode) == INVALID_MONETARY_UNIT_CODE) {
+        if (getCurrencyId(currencyCode) == INVALID_MONETARY_UNIT_CODE) {
             return false;
         }
         return true;
     }
 
-    /**
-     * Verifies if a given date is valid published date.
-     * TODO: Add holidays?
-     */
     public static boolean isMonetaryDateValid(LocalDate date) {
         if (date == null ||
             date.getDayOfWeek() == DayOfWeek.SATURDAY ||
@@ -149,10 +131,6 @@ public class MonetaryUtils {
         return true;
     }
 
-    /**
-     * Returns the last valid day containing a exchange rate.
-     * TODO: Place the hour/location on spring config.
-     */
     public static LocalDate getLastValidMonetaryDate(long centralBankId) {
         LocalDateTime datetime = LocalDateTime.now();
         LocalDate date;
@@ -179,10 +157,6 @@ public class MonetaryUtils {
         return date;
     }
 
-    /**
-     * Verifies if a given date is the latest containing any Exchange rates data.
-     * It assumes that the rates are never published on weekends.
-     */
     public static boolean isRateFeedUpToDate(long centralBankId, String currencyCode) {
         LocalDate dbReferenceDay = getBankRateFeedReferenceDate(centralBankId, currencyCode);
         LocalDate lastValidDay = getLastValidMonetaryDate(centralBankId);
@@ -190,10 +164,6 @@ public class MonetaryUtils {
         return dbReferenceDay.isEqual(lastValidDay);
     }
 
-    /**
-     * Returns the number of weekdays between two dates.
-     * TODO: Remove holidays
-     */
     public static int getWorkingDaysBetweenTwoDates(LocalDate startDate, LocalDate endDate) {
         int workDays = 0;
 
@@ -205,9 +175,6 @@ public class MonetaryUtils {
         return workDays;
     }
 
-    /**
-     * TODO: Verifies which tests uses this to mock out.
-     */
     @PostConstruct
     public static void init() throws DaoException {
 
@@ -248,4 +215,5 @@ public class MonetaryUtils {
     public void setBankFeedReferenceDao(BankRateFeedReferenceRepository referenceRepository) {
         MonetaryUtils.referenceRepository = referenceRepository;
     }
+    */
 }

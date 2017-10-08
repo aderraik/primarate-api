@@ -1,5 +1,6 @@
 package com.visiansystems.ecb;
 
+import com.visiansystems.rates.Rate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -38,13 +39,13 @@ public class EcbDto implements BankDto {
     }
 
     @Override
-    public MonetaryData getLastRate(String currencyCode) throws BankDtoException {
+    public Rate getLastRate(String currencyCode) throws BankDtoException {
         return null;
         //return getRateOnDate(currencyCode, MonetaryUtils.getLastValidMonetaryDate(centralBankId));
     }
 
     @Override
-    public MonetaryData getRateOnDate(String currencyCode, LocalDate date)
+    public Rate getRateOnDate(String currencyCode, LocalDate date)
             throws BankDtoException {
         downloadRate();
 
