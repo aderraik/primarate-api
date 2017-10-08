@@ -1,10 +1,8 @@
 package com.visiansystems.ecb;
 
-import com.visiansystems.rates.Rate;
+import com.visiansystems.rate.Rate;
 import com.visiansystems.util.MonetaryUtils;
 import com.visiansystems.util.logger.CallLogging;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.visiansystems.util.logger.ReturnLogging;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -17,7 +15,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class EcbRpcParser extends EcbRpc {
@@ -90,15 +87,15 @@ public class EcbRpcParser extends EcbRpc {
                     String currencyCode = attributes.getValue("currency");
 
                     if (amount != null && currencyCode != null) {
-//                        System.out.println("EUR -> " + currencyCode + ": " + amount);
-
                         Rate rate = new Rate();
                         rate.setCentralBankId(centralBankId);
                         rate.setAmount(Double.parseDouble(amount));
                         rate.setMonetaryUnitId(utils.getCurrencyId(currencyCode));
                         rate.setDate(parseDate);
-
                         System.out.println(rate);
+
+                        utils.saveRate(rate);
+
 //                        seriesData.addMonetaryData(data);
                     }
                 }

@@ -1,7 +1,6 @@
 package com.visiansystems.ecb;
 
-import com.visiansystems.rates.Rate;
-import com.visiansystems.util.MonetaryUtils;
+import com.visiansystems.rate.Rate;
 import com.visiansystems.util.logger.CallLogging;
 import org.springframework.stereotype.Component;
 

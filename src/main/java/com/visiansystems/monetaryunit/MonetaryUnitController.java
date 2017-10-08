@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("justarate")
-@Api(value = "Endpoint: /justarate", description = "Operations on available publisher service.")
+@Api(value = "/monetaryunit", description = "Operations on available publisher service.")
 public class MonetaryUnitController {
 
     @Autowired

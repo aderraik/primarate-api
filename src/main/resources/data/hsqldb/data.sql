@@ -373,5 +373,5 @@ INSERT INTO MonetaryCountry(name, monetaryUnitId) VALUES ('Zimbabwe', 162);
 -- CENTRAL BANKS
 --------------------------------------------------------------------------------------------------
 
-INSERT INTO CentralBank(id, name, currencyId) VALUES (1, 'Brazilian Central Bank', 20);
-INSERT INTO CentralBank(id, name, currencyId) VALUES (2, 'European Central Bank', 44);
+INSERT INTO CentralBank(id, name, currencyId) VALUES (1, 'European Central Bank', 44);
+INSERT INTO CentralBank(id, name, currencyId) VALUES (2, 'Brazilian Central Bank', 20);

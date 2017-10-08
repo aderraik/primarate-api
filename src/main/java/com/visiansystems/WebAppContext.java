@@ -1,6 +1,6 @@
 package com.visiansystems;
 
-import com.visiansystems.rates.RatesFetcherDaemon;
+import com.visiansystems.rate.RatesFetcherDaemon;
 import com.visiansystems.util.MonetaryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

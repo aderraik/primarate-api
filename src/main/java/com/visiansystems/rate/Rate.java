@@ -1,9 +1,6 @@
-package com.visiansystems.rates;
-
-import com.visiansystems.ecb.LocalDatePersistenceConverter;
+package com.visiansystems.rate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -23,7 +20,7 @@ public class Rate implements Comparable<Rate> {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(nullable = false, name = "centralBankId")
     private long centralBankId;
@@ -48,11 +45,11 @@ public class Rate implements Comparable<Rate> {
         this.amount = amount;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

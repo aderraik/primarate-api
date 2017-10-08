@@ -1,8 +1,7 @@
-package com.visiansystems.rates;
+package com.visiansystems.rate;
 
 import com.visiansystems.ecb.EcbRpcParser;
 import com.visiansystems.util.MonetaryUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.TimeUnit;
 

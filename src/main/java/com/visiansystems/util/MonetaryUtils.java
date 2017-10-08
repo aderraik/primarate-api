@@ -4,6 +4,8 @@ import com.visiansystems.ecb.*;
 import com.visiansystems.monetaryunit.MonetaryUnit;
 import com.visiansystems.monetaryunit.MonetaryUnitRepository;
 import com.visiansystems.monetaryunit.MonetaryUnitService;
+import com.visiansystems.rate.Rate;
+import com.visiansystems.rate.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
@@ -47,7 +49,7 @@ public class MonetaryUtils {
 
     // Static @Autowired variables
     private static MonetaryUnitRepository unitRepository;
-    private static BankRateFeedReferenceRepository referenceRepository;
+//    private static BankRateFeedReferenceRepository referenceRepository;
 
     // Static @Resource variables
     private static List<MonetaryUnit> bcbCurrencies;
@@ -58,12 +60,17 @@ public class MonetaryUtils {
     @Autowired
     private MonetaryUnitService monetaryUnitService;
 
+    @Autowired
+    private RateService rateService;
+
 
     public long getCurrencyId(String currencyCode) {
         return monetaryUnitService.findByCode(currencyCode).getId();
     }
 
-
+    public void saveRate(Rate rate){
+        rateService.create(rate);
+    }
 
 
     /*
@@ -206,7 +213,7 @@ public class MonetaryUtils {
 
     @Autowired
     @Required
-    public void setMonetaryUnitDao(MonetaryUnitRepository unitRepository) {
+    public void setMonetaryUnitDao(RateRepository unitRepository) {
         MonetaryUtils.unitRepository = unitRepository;
     }
 

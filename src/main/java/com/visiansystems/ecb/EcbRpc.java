@@ -38,8 +38,8 @@ public class EcbRpc {
     //TODO: Move this property to the context
     public EcbRpc() {
         //        selectFullRates();
-        //        selectLastDayRates();
-        selectLast90dRates();
+                selectLastDayRates();
+//        selectLast90dRates();
         initCacheFile();
     }
 

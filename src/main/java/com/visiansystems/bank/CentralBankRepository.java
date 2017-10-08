@@ -1,4 +1,4 @@
-package com.visiansystems.ecb;
+package com.visiansystems.bank;
 
 import com.visiansystems.bank.CentralBank;
 import org.springframework.data.repository.CrudRepository;
