@@ -88,8 +88,7 @@ public class EcbRpcParser extends EcbRpc {
                     String currencyCode = attributes.getValue("currency");
 
                     if (amount != null && currencyCode != null) {
-//                        System.out.println(amount + ", " + currencyCode);
-                        System.out.println(currencyCode);
+                        System.out.println(amount + ", " + currencyCode);
 
                         data.setAmount(Double.parseDouble(amount));
                         data.setMonetaryUnitId(MonetaryUtils.getMonetaryIdFromCode(currencyCode));

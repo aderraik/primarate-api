@@ -3,16 +3,13 @@ package com.visiansystems.monetaryunit;
 import javax.persistence.*;
 
 /**
- * Monetary Unit class represents a Country's currency.
- * <p/>
- * Eg.:
- * +----------------+------+----------------------------------------+--------+
- * | monetaryUnitId | code | name                                   | symbol |
- * +----------------+------+----------------------------------------+--------+
- * |              1 | ALL  | Lek Albanês                            | ALL    |
- * |              2 | AED  | Dirém dos Emirados Árabes Unidos       | AED    |
- * |              3 | ARS  | Peso argentino                         | ARS    |
- * +----------------+------+----------------------------------------+--------+
+ * +----------------+------+----------------------------------------+
+ * |             id | code | name                                   |
+ * +----------------+------+----------------------------------------+
+ * |              1 | ALL  | Lek Albanês                            |
+ * |              2 | AED  | Dirém dos Emirados Árabes Unidos       |
+ * |              3 | ARS  | Peso argentino                         |
+ * +----------------+------+----------------------------------------+
  */
 @Entity
 @Table(name = "MonetaryUnit")
@@ -20,16 +17,13 @@ public class MonetaryUnit {
     public static final String outFormat = "%1$03d | %2$3.3s | %3$3.3s | %4$s ";
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(unique = true, nullable = false, name = "code")
     private String code;
-
 
     public MonetaryUnit() {
     }
