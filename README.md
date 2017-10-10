@@ -1,1 +1,1 @@
-# justarate-api
+#primarate-api
