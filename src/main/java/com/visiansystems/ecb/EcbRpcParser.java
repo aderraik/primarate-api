@@ -2,8 +2,6 @@ package com.visiansystems.ecb;
 
 import com.visiansystems.rate.Rate;
 import com.visiansystems.util.MonetaryUtils;
-import com.visiansystems.util.logger.CallLogging;
-import com.visiansystems.util.logger.ReturnLogging;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -20,15 +18,12 @@ import java.util.Date;
 public class EcbRpcParser extends EcbRpc {
     private SimpleDateFormat dateFormat;
     private Date parseDate;
-    private MonetarySeriesData seriesData;
     private long centralBankId;
-
     private MonetaryUtils utils;
 
     public EcbRpcParser(MonetaryUtils monetaryUtils) {
         super();
         centralBankId = 1; //TODO: Associate with DB
-        seriesData = new MonetarySeriesData(1);
         dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm z");
         utils = monetaryUtils;
     }
@@ -51,17 +46,9 @@ public class EcbRpcParser extends EcbRpc {
         }
     }
 
-    public void clear() {
-        seriesData.clear();
-    }
-
-    @CallLogging(CallLogging.Level.INFO)
-    @ReturnLogging(ReturnLogging.Level.INFO)
     public void parse() throws ParseException, IOException, SAXException {
         FileReader input = new FileReader(cacheFile);
         XMLReader saxReader = XMLReaderFactory.createXMLReader();
-
-        seriesData.clear();
 
         DefaultHandler handler = new DefaultHandler() {
 
@@ -95,8 +82,6 @@ public class EcbRpcParser extends EcbRpc {
                         System.out.println(rate);
 
                         utils.saveRate(rate);
-
-//                        seriesData.addMonetaryData(data);
                     }
                 }
             }
@@ -109,9 +94,5 @@ public class EcbRpcParser extends EcbRpc {
 
     public void setCentralBankId(long centralBankId) {
         this.centralBankId = centralBankId;
-    }
-
-    public MonetarySeriesData getMonetarySeriesData() {
-        return seriesData;
     }
 }

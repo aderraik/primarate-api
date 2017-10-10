@@ -1,15 +1,10 @@
 package com.visiansystems.ecb;
 
-import com.visiansystems.util.MonetaryUtils;
-import com.visiansystems.util.logger.CallLogging;
-import com.visiansystems.util.logger.ReturnLogging;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -131,8 +126,6 @@ public class EcbRpc {
      * @throws IOException If (1) URL cannot be opened, or (2) if cache file cannot
      *                     be opened, or (3) if a read/write error occurs.
      */
-    @CallLogging(CallLogging.Level.INFO)
-    @ReturnLogging(ReturnLogging.Level.INFO)
     public void refreshCacheFile() throws IOException {
         lastError = null;
         initCacheFile();
