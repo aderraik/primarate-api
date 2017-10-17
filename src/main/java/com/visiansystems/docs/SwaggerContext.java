@@ -16,10 +16,10 @@ public class SwaggerContext {
 
     @Bean
     public Docket docket() {
-        Predicate<String> paths = PathSelectors.ant("/justarate/**");
+        Predicate<String> paths = PathSelectors.ant("/primarate/**");
 
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("Justarate API")
+                .title("Primarate API")
                 .contact("visiansystems.com").version("0.0.1").build();
 
         Docket docket = new Docket(DocumentationType.SWAGGER_2)

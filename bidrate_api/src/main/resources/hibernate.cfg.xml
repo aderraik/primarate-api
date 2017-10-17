@@ -23,7 +23,7 @@
         <!--hibernate.dialect                 = org.hibernate.dialect.MySQLDialect-->
         <!--hibernate.connection.driver_class = com.mysql.jdbc.Driver-->
         <!--hibernate.connection.pool_size    = 10-->
-        <!--hibernate.connection.url          = jdbc:mysql://localhost/justarate-->
+        <!--hibernate.connection.url          = jdbc:mysql://localhost/primarate-->
         <!--hibernate.connection.username     = root-->
         <!--hibernate.connection.password     =-->
         <!--hibernate.hbm2ddl.auto            = update-->

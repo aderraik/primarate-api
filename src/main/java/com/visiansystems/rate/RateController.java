@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("justarate")
+@RequestMapping("primarate")
 @Api(value = "/rate", description = "Operations on available publisher service.")
 public class RateController {
 

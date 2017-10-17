@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("justarate")
+@RequestMapping("primarate")
 @Api(value = "/monetaryunit", description = "Operations on available publisher service.")
 public class MonetaryUnitController {
 
